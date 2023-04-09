@@ -1,0 +1,45 @@
+.mainComponent{
+ width: 90vw;
+ overflow-x: hidden;
+}
+
+input:focus{
+    box-shadow: none !important;
+}
+
+textarea:focus{
+    box-shadow: none !important;
+}
+
+.blockChain{
+    position: relative;
+    z-index: -100; 
+    top:-35vh;
+} 
+
+@media screen and (max-width: 480px){
+    .homeInfo , .mainComponent > * {
+      /* padding: 0 !important; */
+      margin-top: 1rem !important;
+    }
+    
+    .heroBanner{
+        display: none;
+    }
+
+
+    .validateString {   
+        margin-top: 4rem !important;
+    }
+    .validateString :nth-child(2) {
+        margin-top: 1rem !important;
+    }
+  }
+
+/* @media (orientation : portrait) {
+    .heroBanner{
+        display: none;
+    }
+
+} */
+

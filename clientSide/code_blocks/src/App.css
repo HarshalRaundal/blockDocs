@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  overflow-x: hidden;
+  font-family: 'Noto Sans', sans-serif !important;
 }
 
 .App-logo {

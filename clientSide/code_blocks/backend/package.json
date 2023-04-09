@@ -1,0 +1,23 @@
+{
+  "name": "block_docs_server",
+  "version": "1.0.0",
+  "description": "backend for blockchain based document verfication web application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "nodemon index.js"
+  },
+  "author": "harshal raundal",
+  "license": "ISC",
+  "dependencies": {
+    "eth-sig-util": "^3.0.1",
+    "ethereumjs-util": "^7.1.5",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^6.9.0",
+    "nodemon": "^2.0.20",
+    "web3": "^1.8.2",
+    "web3-eth": "^1.8.2",
+    "web3-eth-personal": "^1.8.2"
+  }
+}
