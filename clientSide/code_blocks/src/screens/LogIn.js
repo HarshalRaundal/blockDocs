@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import Footer from '../components/Footer'
 import NavigationBar from '../components/Navbar'
 import Web3 from "web3";
 import { useNavigate } from 'react-router-dom';
+import { GlobalUserContext } from './AuthContext';
 const { ethereum } = window;
 
 
@@ -11,6 +12,7 @@ export const LogIn = () => {
     let isMetaMask = true;
     const [loginPressed, setLoginPressed] = useState(false);
     const [processTxt , setProcessTxt] = useState("Click LogIn to authenticate yourself ");
+    const [globalUser , setGlobalUser] = useContext(GlobalUserContext);
     
 
     const  handleLogin = async () => {
@@ -61,6 +63,8 @@ export const LogIn = () => {
                 setProcessTxt("Authentication Successful :) ");
                 setLoginPressed(false);
                 localStorage.setItem("authToken" , response.authToken);
+                setGlobalUser({userId:accounts[0] , loggedIn:true})
+                // console.log('account: ',accounts[0]);
                 naviagte('/');
             }
             setProcessTxt("Click LogIn to authenticate yourself ");
@@ -76,7 +80,7 @@ export const LogIn = () => {
         }
 
         setLoginPressed(false);
-        
+        // console.log("User : ",globalUser);
 
     }
 

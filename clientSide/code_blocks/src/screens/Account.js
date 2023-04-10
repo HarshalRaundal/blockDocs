@@ -3,8 +3,12 @@ import Footer from '../components/Footer'
 import NavigationBar from '../components/Navbar'
 import avatar from  '../images/avatar.jpg'
 import certificate from  '../images/certificate.jpg'
+import { GlobalUserContext } from './AuthContext';
+import {useContext} from 'react';
 
 export const Account = () => {
+    const [globalUser , setGlobalUser] = useContext(GlobalUserContext);
+    // console.log("user: ",globalUser.userId);
   return (
     <div>
         <NavigationBar/>
@@ -18,8 +22,9 @@ export const Account = () => {
                 <div className="card">
                    
                     <div className="card-body">
-                        <h5 className="card-title">MetaMask Address </h5>
-                        <a href="#" className="btn btn-primary">Copy Address</a>
+                        <h5 className="card-title">MetaMask Address  </h5>
+                        {/* <h6>{globalUser.userId}</h6> */}
+                        <div href="#" className="btn btn-primary" onClick={() => navigator.clipboard.writeText(globalUser.userId)}>Copy Address</div>
                     </div>
                     </div>
                 </div>
@@ -78,7 +83,7 @@ export const Account = () => {
                                 {/* CARD */}
                     </div>
                   
-                </div>
+                    </div>
 
 
                 </div>

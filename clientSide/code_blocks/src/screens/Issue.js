@@ -3,10 +3,51 @@ import NavigationBar from '../components/Navbar'
 import Footer from '../components/Footer'
 import heroBanner from '../images/issue.jpg';
 import  '../styles/home.css';
+import { useState,useEffect ,useContext} from 'react';
 import  '../styles/issue.css';
+import { GlobalUserContext } from './AuthContext';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const Issue = () => {
+
+    let [certificateDetails , setCertificateDetails] = useState({id:"",name:"",issueDate :"", metaId:""});
+
+    const [globalUser , setGlobalUser] = useContext(GlobalUserContext);
+    
+    const showToastMessage = () => {
+        toast.success('Successfully Issued certificate !', {
+            position: toast.POSITION.TOP_RIGHT
+        });
+    };
+
+    // useEffect(() => {
+    //     console.log('certificateDetails has been updated:', certificateDetails);
+    //   }, [certificateDetails]);
+
+    const inputChange = async (e) => {
+        e.preventDefault();
+        await setCertificateDetails({...certificateDetails , [e.target.name] : e.target.value});
+    }
+
+    const submitForm = (e) => {
+        e.preventDefault();
+        const data = {certificateDetails : {...certificateDetails,issuerId:globalUser.userId}};
+        fetch('http://localhost:5000/api/certificateIssuer', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+              },
+            // We convert the React state to JSON and send it as the POST body
+            body: JSON.stringify(data)
+        }).then(response => response.json().then(data => { 
+            console.log(data);
+            setCertificateDetails({id:"",name:"",issueDate :"", metaId:""});
+            showToastMessage();
+        }));
+    }
+
     return (
         <div>
 
@@ -24,10 +65,10 @@ const Issue = () => {
                         
                                 <div class="row g-3 align-items-center justify-content-center ">
                                     <div class="col-sm-12 col-md-6 col-lg-5  Issuelabel">
-                                        <label for="inputID" class="col-form-label">Student ID: </label>
+                                        <label for="inputID" class="col-form-label"  >Student ID: </label>
                                     </div>
                                     <div class="col-sm-7 col-md-6 col-lg-7 col-auto d-flex justify-content-center align-items-center">
-                                        <input type="text" id="inputID" class="form-control" />
+                                        <input type="text" id="inputID" name = "id" class="form-control" value = {certificateDetails.id} onChange={inputChange}/>
                                     </div>
                                     
                                 </div>  
@@ -37,33 +78,36 @@ const Issue = () => {
                                         <label for="inputName" class="col-form-label">Student Name: </label>
                                     </div>
                                     <div class="col-sm-7 col-md-6 col-lg-7 col-auto d-flex justify-content-center align-items-center">
-                                        <input type="text" id="inputName" class="form-control" />
+                                        <input type="text" id="inputName" name="name" value = {certificateDetails.name} onChange={inputChange} class="form-control" />
                                     </div>
                                 </div>
 
                                 <div class="row g-3 align-items-center justify-content-center">
                                     <div class="col-sm-12 col-md-6 col-lg-5 Issuelabel">
-                                        <label for="inputDate" class="col-form-label">Issue Date: </label>
+                                        <label for="inputDate" class="col-form-label" >Issue Date: </label>
                                     </div>
                                     <div class="col-sm-7 col-md-6 col-lg-7 col-auto d-flex justify-content-center align-items-center">
-                                        <input type="date" id="inputDate" class="form-control" />
+                                        <input type="date" id="inputDate" class="form-control" name="issueDate" value = {certificateDetails.issueDate} onChange={inputChange} />
                                     </div>
                                 </div>
 
                                 <div class="row g-3 align-items-center justify-content-center">
                                     <div class="col-sm-12 col-md-6 col-lg-5 Issuelabel">
-                                        <label for="inputMeta" class="col-form-label">Metamask ID: </label>
+                                        <label for="inputMeta" class="col-form-label" >Metamask ID: </label>
                                     </div>
                                     <div class="col-sm-7 col-md-6 col-lg-7 col-auto d-flex justify-content-center align-items-center">
-                                        <input type="text" id="inputMeta" class="form-control" />
+                                        <input type="text" id="inputMeta" class="form-control" name="metaId" value = {certificateDetails.metaId} onChange={inputChange} />
                                     </div>
                                 </div>
 
                                 <div class="row align-items-center justify-content-center my-4">
-                                    <button type="submit" className=" col-sm-10 col-md-4 col-lg-4 btn btn-dark m-2  ">Validate</button>
+                                    <button type="submit" className=" col-sm-10 col-md-4 col-lg-4 btn btn-dark m-2  " onClick={submitForm}>Issue</button>
                                 </div>
+
                     </form>
                 </div>
+
+                <ToastContainer/>
 
                 <div className='col col-5 heroBanner '>
                     {/* animated svg here */}

@@ -14,11 +14,12 @@ import { About } from './screens/About';
 import Issue from './screens/Issue';
 import { Account } from './screens/Account';
 import Contact from './screens/Contact';
-
+import {GlobalUserProvider} from './screens/AuthContext';
 
 function App() {
   return (
-    <Router>
+    <GlobalUserProvider>
+      <Router>
           <div>
             <Routes>
               <Route exact path="/" element={<Home />} />
@@ -30,6 +31,7 @@ function App() {
             </Routes>
           </div>
         </Router>
+    </GlobalUserProvider>
   );
 }
 

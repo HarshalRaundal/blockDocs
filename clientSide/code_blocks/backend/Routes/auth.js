@@ -9,7 +9,6 @@ const jwtScrete = 'this is secret for jwt token';
 // route for authenticating user
 router.route('/getNonce')
     .post(async (req, res) => {
-
         try {
 
             const { publicAddress } = req.body;

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import NavigationBar from '../components/Navbar'
 import Footer from '../components/Footer'
 import heroBanner from '../images/hero.jpg';
@@ -7,6 +7,29 @@ import blockChain from '../images/on_chain.jpg';
 
 
 const Home = () => {
+
+    let [certificateHash ,setCertificateHash]= useState("");
+
+    const inputChange = (e) => {
+        e.preventDefault();
+        setCertificateHash(e.target.value);
+    }
+
+    const submitForm = (e) => {
+        e.preventDefault();
+        const data = {certificateHash : certificateHash,message:"this is custom message"};
+        fetch('http://localhost:5000/api/certificateValidator', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+              },
+            // We convert the React state to JSON and send it as the POST body
+            body: JSON.stringify(data)
+        }).then(response => response.json().then(data => { 
+            console.log(data);
+        }));
+    }
+    
     return (
         <div>
 
@@ -32,11 +55,11 @@ const Home = () => {
 
                             <div className=" col-sm-10 col-md-8  col-lg-8 form-group  border border-1 border-dark rounded">
                                 {/* <label for="HashStringInput" className='m-1'>Enter Hash of Certificate</label> */}
-                                <input type="text" className="form-control border-0 fs-4" id="HashStringInput"  placeholder="Enter Hash" />
+                                <input type="text" className="form-control border-0 fs-4" id="HashStringInput"  placeholder="Enter Hash" value = {certificateHash} onChange = {inputChange}/>
                                 {/* <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small> */}
                             </div>
                             
-                            <button type="submit" className=" col-sm-10 col-md-4 fs-5 col-lg-4 btn btn-dark ">Validate</button>
+                            <button type="submit" className=" col-sm-10 col-md-4 fs-5 col-lg-4 btn btn-dark " onClick = {submitForm}>Validate</button>
                         </div>
                     </form>
                 </div>

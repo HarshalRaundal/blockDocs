@@ -1,14 +1,19 @@
 import React from 'react'
 import {Link} from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-
+import { GlobalUserContext } from '../screens/AuthContext';
+import {useContext} from 'react';
 const NavigationBar = () => {
     const naviagte = useNavigate();
+    const [globalUser , setGlobalUser] = useContext(GlobalUserContext);
+    
     const handleSignOut = () => {
         localStorage.removeItem("authToken");
+        setGlobalUser({userId:"",loggedIn:false});
         console.log("Logged Out");
         naviagte('/logIn');
     }
+
   return (
     <>
     <nav className="navbar navbar-expand-lg navbar-light bg-light p-2">
@@ -18,15 +23,19 @@ const NavigationBar = () => {
 
         <Link className="navbar-brand fs-3 fw-bold" to="/">Code-Blocks</Link>
 
-        <div className="collapse navbar-collapse justify-content-between " id="navbarTogglerDemo03">
+        <div className="collapse fs-5 navbar-collapse justify-content-between " id="navbarTogglerDemo03">
             <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li className="nav-item active d-flex">
                     <Link className="nav-link" to="/">Home </Link>
                     {/* <Link className="nav-link" to="/about">About </Link>
                     <Link className="nav-link" to="/">Features </Link> */}
+                    {localStorage.getItem("authToken") !== null && (
+                        <>
                     <Link className="nav-link" to="/issue">Issue </Link>
                     <Link className="nav-link" to="/account">Account </Link>
                     <Link className="nav-link" to="/contact">Contact </Link>
+                        </>
+                    )}
                     
                    
                 </li>
