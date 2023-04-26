@@ -12,7 +12,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const Issue = () => {
 
-    let [certificateDetails , setCertificateDetails] = useState({id:"",name:"",issueDate :"", metaId:""});
+    let [certificateDetails , setCertificateDetails] = useState({id:"",name:"",issueDate :"", metaId:"",verifier:""});
 
     const [globalUser , setGlobalUser] = useContext(GlobalUserContext);
     
@@ -43,7 +43,7 @@ const Issue = () => {
             body: JSON.stringify(data)
         }).then(response => response.json().then(data => { 
             console.log(data);
-            setCertificateDetails({id:"",name:"",issueDate :"", metaId:""});
+            setCertificateDetails({id:"",name:"",issueDate :"", metaId:"",verifier:""});
             showToastMessage();
         }));
     }
@@ -97,6 +97,16 @@ const Issue = () => {
                                     </div>
                                     <div class="col-sm-7 col-md-6 col-lg-7 col-auto d-flex justify-content-center align-items-center">
                                         <input type="text" id="inputMeta" class="form-control" name="metaId" value = {certificateDetails.metaId} onChange={inputChange} />
+                                    </div>
+                                </div>
+
+
+                                <div class="row g-3 align-items-center justify-content-center">
+                                    <div class="col-sm-12 col-md-6 col-lg-5 Issuelabel">
+                                        <label for="verifierMeta" class="col-form-label" >Verifier Metamask ID: </label>
+                                    </div>
+                                    <div class="col-sm-7 col-md-6 col-lg-7 col-auto d-flex justify-content-center align-items-center">
+                                        <input type="text" id="verifierMeta" class="form-control" name="verifier" value = {certificateDetails.verifier} onChange={inputChange} />
                                     </div>
                                 </div>
 
