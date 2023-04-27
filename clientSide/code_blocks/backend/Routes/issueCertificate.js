@@ -1,7 +1,7 @@
 const express = require('express');
 const certificateModel = require('../Models/Certificate');
 const router = express.Router();
-const hashModule = require('../hashBcrypt');
+// const hashModule = require('../hashBcrypt');
 const {issueCertificate} = require("../contract");
 
 router.route('/certificateIssuer')

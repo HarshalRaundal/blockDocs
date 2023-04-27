@@ -30,6 +30,11 @@ const Contact = () => {
 
     const submitForm = (e) => {
         e.preventDefault();
+
+        if (contactDetails.name === "" || contactDetails.email === "" || contactDetails.message === "") {
+            alert("Enter valid contact details!!!");
+            return;
+        }
         const data = {contactDetails : contactDetails};
         fetch('http://localhost:5000/api/contact', {
             method: 'POST',

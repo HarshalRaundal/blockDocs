@@ -33,7 +33,14 @@ const Issue = () => {
 
     const submitForm = (e) => {
         e.preventDefault();
+        if(certificateDetails.id==="" || certificateDetails.name===""||certificateDetails.issueDate===""||certificateDetails.metaId===""||certificateDetails.verifier===""||certificateDetails.certName==="")
+        {
+            alert("Enter valid certificate details");
+            return;
+        }
+
         const data = {certificateDetails : {...certificateDetails,issuerId:globalUser.userId}};
+
         fetch('http://localhost:5000/api/certificateIssuer', {
             method: 'POST',
             headers: {
