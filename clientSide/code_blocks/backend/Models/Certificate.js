@@ -9,6 +9,7 @@ const certificateSchema = new Schema({
   issuerMeta : String,
   body: String,
   certificateHash:String,
+  certName:String,
   date: { type: Date, default: Date.now },
 });
 

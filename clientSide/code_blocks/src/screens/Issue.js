@@ -12,7 +12,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const Issue = () => {
 
-    let [certificateDetails , setCertificateDetails] = useState({id:"",name:"",issueDate :"", metaId:"",verifier:""});
+    let [certificateDetails , setCertificateDetails] = useState({id:"",name:"",issueDate :"", metaId:"",verifier:"",certName:""});
 
     const [globalUser , setGlobalUser] = useContext(GlobalUserContext);
     
@@ -43,7 +43,7 @@ const Issue = () => {
             body: JSON.stringify(data)
         }).then(response => response.json().then(data => { 
             console.log(data);
-            setCertificateDetails({id:"",name:"",issueDate :"", metaId:"",verifier:""});
+            setCertificateDetails({id:"",name:"",issueDate :"", metaId:"",verifier:"",certName:""});
             showToastMessage();
         }));
     }
@@ -79,6 +79,14 @@ const Issue = () => {
                                     </div>
                                     <div class="col-sm-7 col-md-6 col-lg-7 col-auto d-flex justify-content-center align-items-center">
                                         <input type="text" id="inputName" name="name" value = {certificateDetails.name} onChange={inputChange} class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="row g-3 align-items-center justify-content-center">
+                                    <div class="col-sm-12 col-md-6 col-lg-5 Issuelabel">
+                                        <label for="certName" class="col-form-label">Certificate Name: </label>
+                                    </div>
+                                    <div class="col-sm-7 col-md-6 col-lg-7 col-auto d-flex justify-content-center align-items-center">
+                                        <input type="text" id="certName" name="certName" value = {certificateDetails.certName} onChange={inputChange} class="form-control" />
                                     </div>
                                 </div>
 

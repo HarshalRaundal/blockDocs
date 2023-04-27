@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {Link} from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { GlobalUserContext } from '../screens/AuthContext';
@@ -12,7 +12,18 @@ const NavigationBar = () => {
         setGlobalUser({userId:"",loggedIn:false});
         console.log("Logged Out");
         naviagte('/logIn');
+
     }
+
+    useEffect(()=>{
+        // check if sign in
+        if(localStorage.getItem("authToken") !== null && globalUser.loggedIn === false){
+            globalUser.userId = localStorage.getItem('userId');
+            console.log( localStorage.getItem('userId'));
+            globalUser.loggedIn = true;
+        }
+        // console.log("reset global user state: ",globalUser);
+    },[]);
 
   return (
     <>

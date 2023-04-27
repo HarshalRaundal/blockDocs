@@ -23,14 +23,14 @@ router.route('/certificateIssuer')
         /* ----------------------- */
         
         /* ADDING CERTIFICATE TO THE BLOCKCHAIN */
-        const resultBlock = await issueCertificate(certificateDetails.id,
+        const transactionQuery = await issueCertificate(certificateDetails.id,
             certificateDetails.name,
             certificateDetails.issueDate,
             certificateDetails.issuerId,
             certificateDetails.metaId
             );
 
-       
+        console.log("tx: ",transactionQuery);
         /* ------------------------------------ */
 
 
@@ -42,17 +42,18 @@ router.route('/certificateIssuer')
                 studentMeta:certificateDetails.metaId,
                 issuerMeta : certificateDetails.issuerId,
                 verifierMeta : certificateDetails.verifier,
-                certificateHash:resultBlock.data
+                certificateHash:transactionQuery,
+                certName : certificateDetails.certName
             })
             .save((err) => {
                     if(err) {
                         res.send({err:err,success:false,task:"failed to save certificate to mongoDB"})
                     }
         });
-        console.log("databaseQuery: ",databaseQuery);
+        // console.log("databaseQuery: ",databaseQuery);
         /* ------------------ */
         res.status(200);
-        res.json({name : certificateDetails.name ,task:"Issed certificate!",success : true});
+        res.json({name : certificateDetails.name ,task:"Issed certificate!",docId: transactionQuery,success : true});
     }
     catch(error) { 
         console.log(error);

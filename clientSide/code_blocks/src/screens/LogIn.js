@@ -63,6 +63,8 @@ export const LogIn = () => {
                 setProcessTxt("Authentication Successful :) ");
                 setLoginPressed(false);
                 localStorage.setItem("authToken" , response.authToken);
+                localStorage.setItem("userId" , accounts[0]);
+                localStorage.setItem("loggedIn" , true);
                 setGlobalUser({userId:accounts[0] , loggedIn:true})
                 // console.log('account: ',accounts[0]);
                 naviagte('/');

@@ -26,6 +26,7 @@ app.use('/api' , require('./Routes/auth'));
 app.use('/api',require('./Routes/validateCertificate'));
 app.use('/api',require('./Routes/issueCertificate'));
 app.use('/api',require('./Routes/contact'));
+app.use('/api',require('./Routes/retriveCertificates'));
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
