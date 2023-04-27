@@ -32,7 +32,7 @@ const NavigationBar = () => {
             <span className="navbar-toggler-icon"></span>
         </button>
 
-        <Link className="navbar-brand fs-3 fw-bold" to="/">Code-Blocks</Link>
+        <Link className="navbar-brand fs-3 fw-bold" to="/">Secure-Cert</Link>
 
         <div className="collapse fs-5 navbar-collapse justify-content-between " id="navbarTogglerDemo03">
             <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
